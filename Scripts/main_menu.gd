@@ -10,7 +10,7 @@ func _ready() -> void:
 # Button function
 func _on_start_game_pressed() -> void:
 	print("Start Game")
-	get_tree().change_scene_to_file("res://Scenes/game.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Core/game.tscn")
 
 
 func _on_options_pressed() -> void:
