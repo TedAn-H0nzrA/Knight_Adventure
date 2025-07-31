@@ -1,9 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://25fus1w65l3"]
+[gd_scene load_steps=15 format=3 uid="uid://25fus1w65l3"]
 
 [ext_resource type="Script" uid="uid://djg6ycnvy736j" path="res://Scripts/main_menu.gd" id="1_uafmi"]
-[ext_resource type="Texture2D" uid="uid://dos1ylyseeqtg" path="res://Assets/Images/Background1.jpg" id="2_okl83"]
+[ext_resource type="Texture2D" uid="uid://ds2t7n6mwm40d" path="res://Assets/Images/Background1.jpg" id="2_okl83"]
 [ext_resource type="FontFile" uid="uid://brvy1vd4mo7s6" path="res://Assets/Fonts/JetBrainsMonoNL-Medium.ttf" id="3_fx57y"]
 [ext_resource type="FontFile" uid="uid://dplenvh4oo1k7" path="res://Assets/Fonts/JetBrainsMono-ExtraBold.ttf" id="4_8jix7"]
+[ext_resource type="Script" uid="uid://cs5y2u20l5nl4" path="res://Scripts/audio_control.gd" id="5_fx57y"]
+[ext_resource type="AudioStream" uid="uid://2rqt7g5yy0c" path="res://Assets/Music/Background_music.mp3" id="5_okl83"]
+[ext_resource type="Script" uid="uid://dm5oygmoj6ymn" path="res://Scripts/fullscreen_control.gd" id="6_8jix7"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1ehe0"]
 texture = ExtResource("2_okl83")
@@ -38,6 +41,14 @@ corner_radius_bottom_left = 50
 shadow_color = Color(0.568627, 0.364706, 0.25098, 0.6)
 shadow_size = 26
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_okl83"]
+color = Color(1, 1, 1, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_fx57y"]
+color = Color(0.014668, 0.299952, 0.545604, 1)
+thickness = 8
+
 [node name="Main_menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -58,7 +69,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_1ehe0")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Main_buttons" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -71,7 +82,7 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/separation = 10
 
-[node name="Start_game" type="Button" parent="VBoxContainer"]
+[node name="Start_game" type="Button" parent="Main_buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -86,7 +97,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ce3w2")
 theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
 text = "Start Game"
 
-[node name="Options" type="Button" parent="VBoxContainer"]
+[node name="Options" type="Button" parent="Main_buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -102,7 +113,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
 text = "Options
 "
 
-[node name="Exit" type="Button" parent="VBoxContainer"]
+[node name="Exit" type="Button" parent="Main_buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -130,6 +141,97 @@ text = "The Knight's Adventure"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="VBoxContainer/Start_game" to="." method="_on_start_game_pressed"]
-[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[node name="Options" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.5
+offset_top = -167.0
+offset_right = 384.5
+offset_bottom = 276.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Options"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_fx57y")
+theme_override_font_sizes/font_size = 30
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Back" type="Button" parent="Options"]
+layout_mode = 1
+offset_right = 167.0
+offset_bottom = 74.0
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_fx57y")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1ehe0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1ehe0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ce3w2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
+text = "Back"
+
+[node name="Audio_control" type="HSlider" parent="Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -194.0
+offset_top = -99.5
+offset_right = 194.0
+offset_bottom = -3.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_okl83")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_fx57y")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_fx57y")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("5_fx57y")
+audio_bus_name = "Music"
+
+[node name="Fullscreen_control" type="CheckButton" parent="Options"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -195.5
+offset_top = -146.0
+offset_right = 195.5
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_fx57y")
+text = "Fullscreen
+"
+script = ExtResource("6_8jix7")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_okl83")
+autoplay = true
+bus = &"Music"
+
+[connection signal="pressed" from="Main_buttons/Start_game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Main_buttons/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Main_buttons/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Options/Back" to="." method="_on_back_pressed"]
+[connection signal="value_changed" from="Options/Audio_control" to="Options/Audio_control" method="_on_value_changed"]
+[connection signal="toggled" from="Options/Fullscreen_control" to="Options/Fullscreen_control" method="_on_toggled"]
