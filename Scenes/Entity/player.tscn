@@ -1,5 +1,6 @@
-[gd_scene load_steps=39 format=3 uid="uid://cc5mx3s1vwdry"]
+[gd_scene load_steps=41 format=3 uid="uid://cc5mx3s1vwdry"]
 
+[ext_resource type="Script" uid="uid://xp274rpfp847" path="res://Scripts/player.gd" id="1_odi8b"]
 [ext_resource type="Texture2D" uid="uid://0kngxq0nw3db" path="res://Assets/Sprites/knight.png" id="1_re1fo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_efh8v"]
@@ -282,7 +283,11 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_re1fo"]
+radius = 5.0
+
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_odi8b")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
@@ -290,3 +295,7 @@ sprite_frames = SubResource("SpriteFrames_tydqb")
 animation = &"Death"
 autoplay = "Idle"
 frame_progress = 0.810993
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_re1fo")
