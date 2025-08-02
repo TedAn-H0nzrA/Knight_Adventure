@@ -1,9 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://bcoefl20eiayu"]
 
-[ext_resource type="Texture2D" uid="uid://ds3u4o1winvym" path="res://Assets/Sprites/world_tileset.png" id="1_4wbfq"]
+[ext_resource type="Texture2D" uid="uid://ds3u4o1winvym" path="res://Assets/Sprites/world_tileset.png" id="1_aqu6o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ofcsa"]
-texture = ExtResource("1_4wbfq")
+texture = ExtResource("1_aqu6o")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
